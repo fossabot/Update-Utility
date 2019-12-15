@@ -12,14 +12,16 @@ public class DownloadLinks {
       Linux: Linux-Latest-Version.zip;
       OSX: OSX-Latest-Version.zip;
     */
-    private static String windowsPrefix ="Windows-";
-    private static String linuxPrefix ="Linux-";
-    private static String osxPrefix ="OSX-";
+    private static String windowsPrefix = "Windows-";
+    private static String linuxPrefix = "Linux-";
+    private static String osxPrefix = "OSX-";
 
     // Program download locations (https://github.com/user/repo/releases/latest/)
     private static String edge_eye_binaries_location = "https://github.com/Edge-Route-Networks/Edge-Eye/releases/latest/download/";
 
-    public String getDownloadedFileName() { return downloadedFileName; }
+    public String getDownloadedFileName() {
+        return downloadedFileName;
+    }
 
     private String getOSSpecificLink() {
         if (System.getProperty("os.name").contains("Windows"))
@@ -36,7 +38,7 @@ public class DownloadLinks {
 
     public String getDownloadLink() {
         // Keep switch, only creates one Updater() object per call.
-        switch(new Updater().getProgram()) {
+        switch (new Updater().getProgram()) {
             case "Edge Eye":
                 return edge_eye_binaries_location + this.getOSSpecificLink();
             default:

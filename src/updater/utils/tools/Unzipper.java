@@ -9,27 +9,6 @@ import java.util.zip.ZipInputStream;
 
 public class Unzipper {
 
-    public void unzip(String fileZip, String destDir) throws Exception {
-            byte[] buffer = new byte[1024];
-            ZipInputStream zis = new ZipInputStream(new FileInputStream(fileZip));
-            ZipEntry zipEntry = zis.getNextEntry();
-
-            while (zipEntry != null) {
-                File newFile = newFile(new File(destDir), zipEntry);
-                FileOutputStream fos = new FileOutputStream(newFile);
-                int len;
-
-                while ((len = zis.read(buffer)) > 0)
-                    fos.write(buffer, 0, len);
-
-                fos.close();
-                zipEntry = zis.getNextEntry();
-            }
-
-            zis.closeEntry();
-            zis.close();
-    }
-
     private static File newFile(File destinationDir, ZipEntry zipEntry) throws IOException {
         File destFile = new File(destinationDir, zipEntry.getName());
 
@@ -42,6 +21,27 @@ public class Unzipper {
             throw new IOException("Entry is outside of the target dir: " + zipEntry.getName());
 
         return destFile;
+    }
+
+    public void unzip(String zipFile, String destDir) throws Exception {
+        byte[] buffer = new byte[1024];
+        ZipInputStream zis = new ZipInputStream(new FileInputStream(zipFile));
+        ZipEntry zipEntry = zis.getNextEntry();
+
+        while (zipEntry != null) {
+            File newFile = newFile(new File(destDir), zipEntry);
+            FileOutputStream fos = new FileOutputStream(newFile);
+            int len;
+
+            while ((len = zis.read(buffer)) > 0)
+                fos.write(buffer, 0, len);
+
+            fos.close();
+            zipEntry = zis.getNextEntry();
+        }
+
+        zis.closeEntry();
+        zis.close();
     }
 
 }
