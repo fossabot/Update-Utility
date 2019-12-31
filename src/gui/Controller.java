@@ -2,6 +2,7 @@ package gui;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.Pane;
@@ -25,6 +26,8 @@ public class Controller {
     // Successful Update Pane
     @FXML
     private Pane successInstallPane;
+    @FXML
+    private Button relaunchButton;
 
     // Error Pane
     @FXML
@@ -50,11 +53,14 @@ public class Controller {
 
     @FXML
     public void relaunchProgram() {
+        this.relaunchButton.setText("Relaunching...");
+        this.relaunchButton.setDisable(true);
+
         String location = new File("").getAbsolutePath();
 
         try {
             if (System.getProperty("os.name").contains("Windows"))
-                new ProcessBuilder("powershell.exe " + ".\\Application.exe").start();
+                new ProcessBuilder(location + "\\application.exe").start();
 
             // else if (System.getProperty("os.name").contains("Linux"))
 
