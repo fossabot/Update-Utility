@@ -4,15 +4,14 @@ import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-public class FileInstaller {
+public class FileManager {
 
     public void installFiles(String updateDirectory, String programDirectory) throws Exception {
         File[] content = new File(updateDirectory).listFiles();
 
         assert content != null;
         for (File file : content) {
-            // Don't move zip file
-            if (!file.getName().contains("zip")) {
+            if (!file.getName().contains("zip")) { // Don't move zip file
                 if (System.getProperty("os.name").contains("Windows"))
                     this.moveFile(file.getAbsolutePath(), programDirectory + "\\" + file.getName());
 
@@ -23,18 +22,23 @@ public class FileInstaller {
     }
 
     private void moveFile(String source, String destination) throws Exception {
+        if (this.dirExists(destination))
+            new File(destination).delete();
+
         Files.move(Paths.get(source), Paths.get(destination));
     }
 
-    public boolean deleteDirectory(File directory) {
-        File[] allContents = directory.listFiles();
+    public boolean dirExists(String dir) {
+        return new File(dir).exists();
+    }
 
-        if (allContents != null) {
-            for (File file : allContents)
-                this.deleteDirectory(file);
-        }
+    public void deleteDirectory(File outputFolder) {
+        File[] files = outputFolder.listFiles();
 
-        return directory.delete();
+        assert files != null;
+        for (File f : files) f.delete();
+
+        outputFolder.delete();
     }
 
 }

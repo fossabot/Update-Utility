@@ -1,44 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.*?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.*?>
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
-            minWidth="-Infinity"
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
             prefHeight="400.0" prefWidth="800.0" style="-fx-background-color: black;"
             xmlns="http://javafx.com/javafx/11.0.1" fx:controller="gui.Controller">
     <children>
-        <Pane fx:id="installingUpdatePane" prefHeight="400.0" prefWidth="806.0">
+        <Pane fx:id="installingUpdatePane" layoutX="-3.0" prefHeight="400.0" prefWidth="806.0">
             <children>
-                <Label fx:id="title" layoutX="90.0" layoutY="100.0" text="[Program Name] Software Update"
+                <ProgressBar fx:id="progressBar" layoutX="94.0" layoutY="122.0" prefHeight="12.0" prefWidth="619.0"
+                             progress="0.0" style="-fx-background-color: black;" visible="false"/>
+                <Label fx:id="statusText" alignment="CENTER" contentDisplay="CENTER" layoutX="221.0" layoutY="197.0"
+                       prefHeight="28.0" prefWidth="365.0" text="Starting update" textAlignment="CENTER"
                        textFill="WHITE">
                     <font>
-                        <Font size="20.0"/>
+                        <Font name="System Bold" size="18.0"/>
                     </font>
                 </Label>
-                <ProgressBar fx:id="progressBar" layoutX="90.0" layoutY="142.0" prefHeight="12.0" prefWidth="619.0"
-                             progress="0.0" style="-fx-background-color: black;"/>
-                <Label fx:id="statusText" contentDisplay="CENTER" layoutX="90.0" layoutY="164.0" prefHeight="28.0"
-                       prefWidth="365.0" text="Starting update..." textFill="WHITE">
+                <Label fx:id="percent" alignment="CENTER" layoutX="316.0" layoutY="235.0" prefHeight="25.0"
+                       prefWidth="175.0" text="0% Complete" textAlignment="CENTER" textFill="WHITE">
                     <font>
-                        <Font name="System Bold" size="14.0"/>
+                        <Font name="System Bold" size="16.0"/>
                     </font>
                 </Label>
-                <Label fx:id="percent" layoutX="685.0" layoutY="169.0" text="0%" textFill="WHITE">
-                    <font>
-                        <Font name="System Bold" size="14.0"/>
-                    </font>
-                </Label>
-                <Label layoutX="90.0" layoutY="202.0" prefHeight="48.0" prefWidth="627.0"
-                       text="We're currently updating your software to the latest version. Please do not close this installer or shutdown your computer. This should only take a few minutes. Please wait until the process is finished."
+                <Label alignment="CENTER" layoutX="210.0" layoutY="279.0" prefHeight="82.0" prefWidth="386.0"
+                       text="Do not turn your computer off, this will take a few minutes." textAlignment="CENTER"
                        textFill="WHITE" wrapText="true">
                     <font>
-                        <Font size="13.0"/>
+                        <Font size="14.0"/>
                     </font>
                 </Label>
+                <ImageView fitHeight="147.0" fitWidth="149.0" layoutX="329.0" layoutY="61.0" pickOnBounds="true"
+                           preserveRatio="true">
+                    <image>
+                        <Image url="@img/block-loader.gif"/>
+                    </image>
+                </ImageView>
             </children>
         </Pane>
         <Pane fx:id="successInstallPane" prefHeight="400.0" prefWidth="800.0" visible="false">
@@ -90,21 +90,13 @@
                         <Font name="System Bold" size="20.0"/>
                     </font>
                 </Label>
-                <Label layoutX="194.0" layoutY="174.0" prefHeight="38.0" prefWidth="414.0"
-                       text="We were unable to update your sofware to the latest version. Please select an option below."
+                <Label layoutX="207.0" layoutY="170.0" prefHeight="38.0" prefWidth="386.0"
+                       text="We were unable to update your sofware to the latest version, please try again later."
                        textAlignment="CENTER" textFill="WHITE" wrapText="true"/>
-                <Label fx:id="errorMessageLabel" layoutX="194.0" layoutY="212.0" prefHeight="90.0" prefWidth="408.0"
+                <Label fx:id="errorMessageLabel" layoutX="211.0" layoutY="208.0" prefHeight="90.0" prefWidth="386.0"
                        text="Error Message:" textFill="WHITE" wrapText="true"/>
-                <Button layoutX="225.0" layoutY="309.0" mnemonicParsing="false" onAction="#manualUpgrade"
-                        prefHeight="0.0" prefWidth="149.0"
-                        style="-fx-background-color: black; -fx-border-color: #0099ff; -fx-border-radius: 5em; -fx-background-radius: 5em;"
-                        text="Manual Update" textFill="WHITE">
-                    <font>
-                        <Font size="14.0"/>
-                    </font>
-                </Button>
-                <Button fx:id="exitButton" layoutX="428.0" layoutY="309.0" mnemonicParsing="false" onAction="#exit"
-                        prefHeight="0.0" prefWidth="149.0"
+                <Button layoutX="324.0" layoutY="328.0" mnemonicParsing="false" onAction="#exit" prefHeight="0.0"
+                        prefWidth="149.0"
                         style="-fx-background-color: black; -fx-border-color: #0099ff; -fx-border-radius: 5em; -fx-background-radius: 5em;"
                         text="Exit" textFill="WHITE">
                     <font>
